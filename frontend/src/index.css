@@ -1,0 +1,371 @@
+body,
+* {
+  margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 15px;
+}
+
+.login-header {
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  height: 20vh;
+}
+
+img {
+  position: absolute;
+  left: 5%;
+}
+
+.login-header-title {
+  font-weight: bold;
+}
+
+.login-main {
+  height: 75vh;
+}
+
+.login-main-title {
+  margin-left: 47%;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.form-outline {
+  margin-left: 10% !important;
+  width: 80vw !important;
+  margin-bottom: 15px;
+}
+
+.login-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  padding: 10px;
+}
+
+.login-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-signup-p {
+  font-size: 1.2rem;
+  margin-right: 50px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid black;
+  height: 2.5vh;
+}
+
+.signup-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-signup {
+  margin-right: 25%;
+}
+
+.signup-form {
+  height: 75vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  border-bottom: 1px solid black;
+}
+
+.header-title {
+  font-weight: bold;
+}
+
+.header-date {
+  position: absolute;
+  left: 15%;
+  top: 12.5%;
+}
+
+.header-user {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+}
+
+.header-buttons {
+  position: absolute;
+  right: 2.5%;
+  top: 10%;
+}
+
+.menu {
+  position: absolute;
+  display: block;
+  width: 100px;
+  border: 1px solid black;
+  right: 6.5%;
+  top: 16%;
+}
+
+.edit-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-form {
+  height: 70vh;
+}
+
+.edit-edit {
+  margin-right: 25%;
+}
+
+.edit-password-form {
+  height: 70vh;
+}
+
+.delete-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.delete-delete {
+  margin-right: 25%;
+}
+
+.delete-main {
+  height: 70vh;
+}
+
+.menu-dashboard {
+  display: flex;
+  margin-left: 5%;
+  margin-top: 0.5%;
+}
+
+.menu-tran {
+  position: absolute;
+  display: inline-block;
+  top: 25.5%;
+  width: 75px;
+  left: 12.75%;
+}
+
+.menu-stat {
+  position: absolute;
+  display: inline-block;
+  top: 25.5%;
+  width: 75px;
+  left: 20.6%;
+}
+
+.dashboard-main {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 25px;
+  height: fit-content;
+}
+
+.dashboard-main-left {
+  margin-left: 10%;
+}
+
+.dashboard-main-left-h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.dashboard-input {
+  text-align: center;
+  width: 75px;
+  margin-left: 40%;
+  margin-bottom: 25px;
+}
+
+.dashboard-income {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.dashboard-expense {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+span {
+  font-size: 1.2rem;
+}
+
+.dashboard-main-right {
+  margin-top: 0px;
+}
+
+.dashboard-main-right-buttons {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.all {
+  border: 1px solid black;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.all-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-title {
+  margin-right: 25%;
+}
+
+.all-income {
+  color: green;
+  margin-left: 50px;
+}
+
+.all-expense {
+  color: red;
+  margin-left: 50px;
+}
+
+.all-date {
+  text-align: center;
+}
+
+.td-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.add-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.if-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 45vh;
+}
+
+.td-main-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.td-main-results {
+  margin-bottom: 15px;
+}
+
+.et-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.et-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 40vh;
+}
+
+@import "~react-vis/dist/style";
+
+.stat-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.stat-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+
+.stat {
+  border-bottom: 1px solid black;
+}
+
+@media only screen and (max-width: 768px) {
+  body,
+  * {
+    font-size: 15px;
+  }
+
+  .dashboard-main {
+    grid-template-columns: auto;
+  }
+
+  .stat-main {
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  .menu-tran {
+    left: 24.5%;
+  }
+
+  .menu-stat {
+    left: 44%;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .menu-tran {
+    left: 38%;
+  }
+
+  .menu-stat {
+    left: 67%;
+  }
+
+  .header {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .header-title{
+    margin-left: 20%;
+  }
+}
