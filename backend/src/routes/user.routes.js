@@ -1,6 +1,7 @@
 import express from "express";
 import userController from "../controllers/user.controller";
 import authController from "../controllers/auth.controller";
+import cacheController from "../controllers/cache.controller";
 
 const router = express.Router();
 
@@ -21,5 +22,10 @@ router
   );
 
 router.param("userId", userController.userByID);
+
+router
+  .route("/api/cache")
+  .get(cacheController.read)
+  .post(cacheController.writte);
 
 export default router;

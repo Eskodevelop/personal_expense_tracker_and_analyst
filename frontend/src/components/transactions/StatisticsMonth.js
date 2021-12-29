@@ -5,6 +5,7 @@ import Menu from "../core/Menu";
 import { list } from "./api-transaction";
 import { Chart } from "react-google-charts";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 // StatisticsYear
 
@@ -24,13 +25,14 @@ export default function StatisticsMonth() {
 
   /* eslint-disable */
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return <Navigate to="/" />;
     }
 
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const tempUser = token.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
+
     setUser(tempUser);
 
     list().then((values, error) => {
@@ -116,7 +118,8 @@ export default function StatisticsMonth() {
       const currentDate = new Date();
       const currentDay = currentDate.getDate().toString();
 
-      const weekChecker = parseInt(currentDay - day);
+      const weekChecker = Math.abs(parseInt(0 - day));
+      console.log(weekChecker);
 
       if (weekChecker < 8) {
         if (value.type === "income") {

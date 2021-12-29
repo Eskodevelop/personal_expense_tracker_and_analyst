@@ -4,6 +4,7 @@ import AddMenu from "./AddMenu";
 import { Button, Alert } from "react-bootstrap";
 import { create, list } from "./api-transaction";
 import { Navigate } from "react-router";
+import axios from "axios";
 
 /* eslint-disable */
 
@@ -26,13 +27,13 @@ export default function AddIncome() {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return window.location.assign("/");
     }
 
-    let temp = JSON.parse(sessionStorage.getItem("token"));
-    let tempUser = temp.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
 
     setUser(tempUser);
     setValues({ ...values, objectId: tempUser });

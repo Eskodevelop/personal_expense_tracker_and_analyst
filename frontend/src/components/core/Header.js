@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { signout } from "../user/api-auth";
 import { Link } from "react-router-dom";
 import authHelpers from "../user/auth-helpers";
+import axios from "axios";
 
 const btnStyle = {
   borderRadius: "0px",
@@ -43,16 +44,10 @@ export default function Header({ name, id }) {
     window.location.assign("/");
   };
 
-  useEffect(() => {
-    if (sessionStorage.getItem("googleLogin")) {
-      let user = JSON.parse(localStorage.getItem("token"));
-      return setFirstName(user.user.firstName);
-    }
-
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const tempUser = token.user;
-
-    setFirstName(tempUser.firstName);
+  useEffect(async () => {
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let user = cache.data;
+    setFirstName(user.firstName);
   }, []);
 
   return (

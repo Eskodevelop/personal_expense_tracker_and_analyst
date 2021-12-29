@@ -5,6 +5,7 @@ import Menu from "../core/Menu";
 import { list } from "./api-transaction";
 import { Chart } from "react-google-charts";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 /* eslint-disable */
 
@@ -23,15 +24,15 @@ export default function StatisticsWeek() {
   const [sun, setSun] = useState({ income: 0, expense: 0 });
   const [chart, setChart] = useState("pie");
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return <Navigate to="/" />;
     }
 
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const tempUser = token.user;
-    setUser(tempUser);
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
 
+    setUser(tempUser);
     list().then((values, error) => {
       if (error) {
         console.log(error);
@@ -55,10 +56,7 @@ export default function StatisticsWeek() {
 
               const weekChecker = currentDay - day;
 
-              if (
-                month===currentMonth &&
-                year === currentYear
-              ) {
+              if (month === currentMonth && year === currentYear) {
                 response[i] = value;
                 i++;
               }

@@ -6,6 +6,7 @@ import { Alert } from "react-bootstrap";
 import { signin } from "./api-auth";
 import auth from "./auth-helpers";
 import GoogleLogin from "react-google-login";
+import axios from "axios";
 
 const alertStyles = {
   marginLeft: "10%",
@@ -66,7 +67,30 @@ export default function Login() {
       },
     };
 
-    sessionStorage.setItem("token", JSON.stringify(user));
+    console.log(response);
+
+    axios
+      .post("http://localhost:5000/api/cache", {
+        _id: id,
+        firstName: firstName,
+        email: email,
+        lastName: lastName,
+        nickname: nickname,
+      })
+      .then((response) => console.log(response));
+
+    fetch("http://localhost:5000/api/cache", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: user.user,
+    })
+      .then((response) => response.json())
+      .catch((err) => console.log(err));
+
+    sessionStorage.setItem("token", token);
     sessionStorage.setItem("googleLogin", true);
 
     window.location.assign("/dashboard");
@@ -121,9 +145,10 @@ export default function Login() {
             </Link>
             <div>
               <GoogleLogin
-                clientId="444740149076-09o6ojh4tf9fg1p9ki7d14md7hvun2cf.apps.googleusercontent.com"
+                clientId="1089234590403-7ear4pqjb2456mtg2rsj38kct6dp3vsb.apps.googleusercontent.com"
                 buttonText="Login with Google"
                 onSuccess={signinGoogle}
+                onFailure={(response)=>console.log(response)}
               />
             </div>
           </div>

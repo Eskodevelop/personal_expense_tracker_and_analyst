@@ -5,6 +5,7 @@ import { list } from "./api-transaction";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import DeleteTransaction from "./DeleteTransaction";
+import axios from "axios";
 
 /* eslint-disable */
 
@@ -24,13 +25,13 @@ export default function TransactionsMonth() {
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return window.location.assign("/");
     }
 
-    let temp = JSON.parse(sessionStorage.getItem("token"));
-    let tempUser = temp.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
 
     setUser(tempUser);
 

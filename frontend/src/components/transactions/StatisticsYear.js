@@ -5,6 +5,7 @@ import Menu from "../core/Menu";
 import { list } from "./api-transaction";
 import { Chart } from "react-google-charts";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 // StatisticsYear
 
@@ -30,13 +31,14 @@ export default function StatisticsYear() {
 
   /* eslint-disable */
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return <Navigate to="/" />;
     }
 
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const tempUser = token.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
+
     setUser(tempUser);
 
     list().then((values, error) => {

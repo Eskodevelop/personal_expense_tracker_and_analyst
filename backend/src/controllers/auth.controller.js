@@ -2,6 +2,7 @@ import User from "../models/user.models";
 import jwt from "jsonwebtoken";
 import expressJwt from "express-jwt";
 import config from "./../config/config";
+import cachedUser from "../../../cache/cachedUser";
 
 const signin = (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
@@ -17,21 +18,26 @@ const signin = (req, res) => {
 
     res.cookie("t", token, { expire: new Date() + 9999 });
 
+    cachedUser._id = user._id;
+    cachedUser.firstName = user.firstName;
+    cachedUser.lastName = user.lastName;
+    cachedUser.nickname = user.nickname;
+    cachedUser.email = user.email;
+
     return res.status(200).json({
       token,
-      user: {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        nickname: user.nickname,
-        email: user.email,
-      },
     });
   });
 };
 
 const signout = (req, res) => {
   res.clearCookie("t");
+
+  cachedUser._id = "";
+  cachedUser.firstName = "";
+  cachedUser.lastName = "";
+  cachedUser.nickname = "";
+  cachedUser.email = "";
 
   return res.status(200).json({ message: "signed out" });
 };

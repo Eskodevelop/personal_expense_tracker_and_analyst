@@ -4,8 +4,9 @@ import Menu from "../core/Menu";
 import { list } from "./api-transaction";
 import { Button } from "react-bootstrap";
 import { Chart } from "react-google-charts";
+import axios from "axios";
 
-/* eslint-disable */
+/*eslint-disable*/ 
 
 export default function Dashboard() {
   const [user, setUser] = useState({});
@@ -21,26 +22,27 @@ export default function Dashboard() {
   const [inc, setInc] = useState(false);
   const [exp, setExp] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return window.location.assign("/");
     }
 
-    let temp = JSON.parse(sessionStorage.getItem("token"));
-    let tempUser = temp.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
 
     setUser(tempUser);
 
     list().then((values, error) => {
       if (error) {
         setError(error);
+        console.log(error);
       } else {
         let response = [];
         let i = 0;
         values.map((value, index) => {
           if (value.objectId._id == tempUser._id) {
             if (value.currency === "$") {
-              value.amount *= 1.73;
+              value.amount = 1.73 * value.amount;
             } else if (value.currency === "€") {
               value.amount *= 1.96;
             }
@@ -77,13 +79,13 @@ export default function Dashboard() {
         if (value.currency === "$") {
           tempIncomes[i] = value;
           i++;
-          tempInc += value.amount * 1.69;
+          tempInc += parseFloat(value.amount * 1.69).toFixed(2);
         }
 
         if (value.currency === "€") {
           tempIncomes[i] = value;
           i++;
-          tempInc += value.amount * 1.95;
+          tempInc += parseFloat(value.amount * 1.95).toFixed(2);
         }
       } else if (value.type === "expense") {
         if (value.currency === "BAM") {
@@ -95,24 +97,24 @@ export default function Dashboard() {
         if (value.currency === "$") {
           tempExpenses[j] = value;
           j++;
-          tempExp += value.amount * 1.69;
+          tempExp += parseFloat(value.amount * 1.69).toFixed(2);
         }
 
         if (value.currency === "€") {
           tempExpenses[j] = value;
           j++;
-          tempExp += value.amount * 1.95;
+          tempExp += parseFloat(value.amount * 1.95).toFixed(2);
         }
       }
     });
 
-    let temp = tempInc - tempExp;
+    let temp = parseFloat(tempInc - tempExp).toFixed(2);
 
     setIncomes(tempIncomes);
     setExpenses(tempExpenses);
-    setTotal(temp);
-    setTotalIncome(tempInc);
-    setTotalExpense(tempExp);
+    setTotal(parseFloat(temp).toFixed(2));
+    setTotalIncome(parseFloat(tempInc).toFixed(2));
+    setTotalExpense(parseFloat(tempExp).toFixed(2));
   }, [data]);
 
   const changeHandler = (e) => {
@@ -128,7 +130,7 @@ export default function Dashboard() {
           setTotalIncome(tempInc);
           let tempExp = totalExpense * 1.69;
           setTotalExpense(tempExp);
-          setTotal(tempTotal.toFixed());
+          setTotal(tempTotal.toFixed(2));
           setCurrency("BAM");
           tempData[index].amount *= 1.69;
           tempData[index].currency = "BAM";
@@ -145,54 +147,58 @@ export default function Dashboard() {
         }
       } else if (e.target.value === "$") {
         if (currency === "BAM") {
-          let tempTotal = total * 0.59;
+          let tempTotal = parseFloat(total * 0.59).toFixed(2);
           setTotal(tempTotal);
-          let tempInc = totalIncome * 0.59;
+          let tempInc = parseFloat(totalIncome * 0.59).toFixed(2);
           setTotalIncome(tempInc);
-          let tempExp = totalExpense * 0.59;
+          let tempExp = parseFloat(totalExpense * 0.59).toFixed(2);
           setTotalExpense(tempExp);
           setCurrency("$");
-          tempData[index].amount *= 0.59;
+          tempData[index].amount *= parseFloat(0.59).toFixed(2);
           tempData[index].currency = "$";
         } else if (currency === "$") {
           return;
         } else if (currency === "€") {
-          let tempTotal = total * 1.16;
+          let tempTotal = parseFloat(total * 1.16).toFixed(2);
           setTotal(tempTotal);
-          let tempInc = totalIncome * 1.16;
+          let tempInc = parseFloat(totalIncome * 1.16).toFixed(2);
           setTotalIncome(tempInc);
-          let tempExp = totalExpense * 1.16;
+          let tempExp = parseFloat(totalExpense * 1.16).toFixed(2);
           setTotalExpense(tempExp);
           setCurrency("$");
-          tempData[index].amount *= 1.16;
+          tempData[index].amount *= parseFloat(1.16).toFixed(2);
           tempData[index].currency = "$";
         }
       } else if (e.target.value === "€") {
         if (currency === "BAM") {
-          let tempTotal = total * 0.51;
+          let tempTotal = parseFloat(total * 0.51).toFixed(2);
           setTotal(tempTotal);
-          let tempInc = totalIncome * 0.51;
+          let tempInc = parseFloat(totalIncome * 0.51).toFixed(2);
           setTotalIncome(tempInc);
-          let tempExp = totalExpense * 0.51;
+          let tempExp = parseFloat(totalExpense * 0.51).toFixed(2);
           setTotalExpense(tempExp);
           setCurrency("€");
-          tempData[index].amount *= 0.51;
+          tempData[index].amount *= parseFloat(0.51).toFixed(2);
           tempData[index].currency = "€";
         } else if (currency === "$") {
-          let tempTotal = total * 0.86;
+          let tempTotal = parseFloat(total * 0.86).toFixed(2);
           setTotal(tempTotal);
-          let tempInc = totalIncome * 0.86;
+          let tempInc = parseFloat(totalIncome * 0.86).toFixed(2);
           setTotalIncome(tempInc);
-          let tempExp = totalExpense * 0.86;
+          let tempExp = parseFloat(totalExpense * 0.86).toFixed(2);
           setTotalExpense(tempExp);
           setCurrency("€");
-          tempData[index].amount *= 0.86;
+          tempData[index].amount *= parseFloat(0.86).toFixed(2);
           tempData[index].currency = "€";
         } else if (currency === "€") {
           return;
         }
       }
     });
+
+    for (let i = 0; i < tempData.length; i++) {
+      tempData[i].amount = parseFloat(tempData[i].amount).toFixed(2);
+    }
 
     setData(tempData);
   };
@@ -243,8 +249,8 @@ export default function Dashboard() {
               height={"500px"}
               data={[
                 ["Income", "Expense"],
-                ["Income", totalIncome],
-                ["Expense", totalExpense],
+                ["Income", parseInt(totalIncome)],
+                ["Expense", parseInt(totalExpense)],
               ]}
               options={{ title: "Transactions" }}
             />
@@ -274,69 +280,72 @@ export default function Dashboard() {
           </div>
           {all ? (
             <div>
-              {data.map((value, index) => {
-                return (
-                  <div className="all" key={index}>
-                    <div className="all-div">
-                      <p className="all-title">
-                        {value.title}
-                        {value.type === "income" ? (
-                          <span className="all-income">
-                            +{value.amount} {value.currency}
-                          </span>
-                        ) : (
-                          <span className="all-expense">
-                            -{value.amount} {value.currency}
-                          </span>
-                        )}
-                      </p>
+              {data &&
+                data.map((value, index) => {
+                  return (
+                    <div className="all" key={index}>
+                      <div className="all-div">
+                        <p className="all-title">
+                          {value.title}
+                          {value.type === "income" ? (
+                            <span className="all-income">
+                              +{value.amount.toFixed(2)} {value.currency}
+                            </span>
+                          ) : (
+                            <span className="all-expense">
+                              -{value.amount.toFixed(2)} {value.currency}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <p className="all-date">{value.created}</p>
                     </div>
-                    <p className="all-date">{value.created}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ) : (
             <div></div>
           )}
           {inc ? (
             <div>
-              {incomes.map((value, index) => {
-                return (
-                  <div className="all" key={index}>
-                    <div className="all-div">
-                      <p className="all-title">
-                        {value.title}
-                        <span className="all-income">
-                          +{value.amount} {value.currency}
-                        </span>
-                      </p>
+              {incomes &&
+                incomes.map((value, index) => {
+                  return (
+                    <div className="all" key={index}>
+                      <div className="all-div">
+                        <p className="all-title">
+                          {value.title}
+                          <span className="all-income">
+                            +{value.amount.toFixed(2)} {value.currency}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="all-date">{value.created}</p>
                     </div>
-                    <p className="all-date">{value.created}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ) : (
             <div></div>
           )}
           {exp ? (
             <div>
-              {expenses.map((value, index) => {
-                return (
-                  <div className="all" key={index}>
-                    <div className="all-div">
-                      <p className="all-title">
-                        {value.title}
-                        <span className="all-expense">
-                          -{value.amount} {value.currency}
-                        </span>
-                      </p>
+              {expenses &&
+                expenses.map((value, index) => {
+                  return (
+                    <div className="all" key={index}>
+                      <div className="all-div">
+                        <p className="all-title">
+                          {value.title}
+                          <span className="all-expense">
+                            -{value.amount.toFixed(2)} {value.currency}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="all-date">{value.created}</p>
                     </div>
-                    <p className="all-date">{value.created}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ) : (
             <div></div>

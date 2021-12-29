@@ -10,7 +10,7 @@ function isAuthenticated() {
 
   if (!sessionStorage.getItem("token")) return false;
 
-  return JSON.parse(sessionStorage.getItem("token"));
+  return sessionStorage.getItem("token");
 }
 
 function clearToken(callback) {

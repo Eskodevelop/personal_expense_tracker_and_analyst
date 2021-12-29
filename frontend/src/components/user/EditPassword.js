@@ -66,6 +66,14 @@ export default function EditPassword() {
       password: values.newPassword || undefined,
     };
 
+    const tempPassword = values.newPassword.split("");
+    if (tempPassword.length < 6) {
+      return setValues({
+        ...values,
+        error: "Password must be over 6 characters!",
+      });
+    }
+
     if (
       hashed_password !==
       crypto.createHmac("sha1", salt).update(values.oldPassword).digest("hex")

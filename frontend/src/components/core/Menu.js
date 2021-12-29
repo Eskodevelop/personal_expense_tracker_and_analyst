@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
@@ -15,6 +15,13 @@ const btnStyle2 = {
 export default function Menu() {
   const [isTransactions, setIsTransactions] = useState(false);
   const [isStat, setIsStat] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setIsStat(false);
+      setIsTransactions(false);
+    };
+  }, []);
 
   return (
     <div className="menu-dashboard">

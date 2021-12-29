@@ -4,8 +4,9 @@ import Header from "../core/Header";
 import { read, update } from "./api-transaction";
 import { Alert, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-/* eslint-disable */ 
+/* eslint-disable */
 
 export default function EditTransaction() {
   const [user, setUser] = useState({});
@@ -26,13 +27,13 @@ export default function EditTransaction() {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return window.location.assign("/");
     }
 
-    let temp = JSON.parse(sessionStorage.getItem("token"));
-    let tempUser = temp.user;
+    let cache = await axios.get("http://localhost:5000/api/cache");
+    let tempUser = cache.data;
 
     setUser(tempUser);
 
@@ -51,6 +52,57 @@ export default function EditTransaction() {
       }
     });
   }, [transactionId]);
+
+  const currencyChange = (e) => {
+    if (values.currency === "€") {
+      if (e.target.value === "€") return;
+      else if (e.target.value === "$") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 1.13).toFixed(2),
+        });
+      } else if (e.target.value === "BAM") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.95).toFixed(2),
+        });
+      }
+    } else if (values.currency === "$") {
+      if (e.target.value === "€") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.89).toFixed(2),
+        });
+      } else if (e.target.value === "$") {
+        return;
+      } else if (e.target.value === "BAM") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.73).toFixed(2),
+        });
+      }
+    } else if (values.currency === "BAM") {
+      if (e.target.value === "€") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.51).toFixed(2),
+        });
+      } else if (e.target.value === "BAM") {
+        return;
+      } else if (e.target.value === "$") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 0.58).toFixed(2),
+        });
+      }
+    }
+  };
 
   const clickHandler = (e) => {
     const transaction = {
@@ -114,7 +166,7 @@ export default function EditTransaction() {
               className="dashboard-input"
               type="search"
               list="mylist"
-              onChange={handleChange("currency")}
+              onChange={currencyChange}
               defaultValue={values.currency}
               style={{ width: "30%", height: "40px" }}
             />
