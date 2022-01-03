@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
+/*eslint-disable*/
+
 const btnStyle = {
   borderRadius: "0px",
   width: "150px",
@@ -30,68 +32,57 @@ export default function Menu() {
           Dashboard
         </Button>
       </Link>
-      <Button
-        variant="outline-dark"
-        onClick={() => setIsTransactions(!isTransactions)}
-        style={btnStyle}
-      >
-        Transactions
-      </Button>
-      <Button
-        variant="outline-dark"
-        onClick={() => setIsStat(!isStat)}
-        style={btnStyle}
-      >
-        Statistics
-      </Button>
 
-      {isTransactions ? (
-        <div className="menu-tran">
-          <Link to="/transactions/daily">
-            <Button variant="dark" style={btnStyle2}>
-              Daily
-            </Button>
-          </Link>
-          <Link to="/transactions/weekly">
-            <Button variant="dark" style={btnStyle2}>
-              Weekly
-            </Button>
-          </Link>
-          <Link to="/transactions/monthly">
-            <Button variant="dark" style={btnStyle2}>
-              Montly
-            </Button>
-          </Link>
-          <Link to="/transactions/yearly">
-            <Button variant="dark" style={btnStyle2}>
-              Yearly
-            </Button>
-          </Link>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Transactions
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/transactions/daily">
+            Daily
+          </a>
+          <a class="dropdown-item" href="/transactions/weekly">
+            Weekly
+          </a>
+          <a class="dropdown-item" href="/transactions/monthly">
+            Montly
+          </a>
+          <a class="dropdown-item" href="/transactions/yearly">
+            Yearly
+          </a>
         </div>
-      ) : (
-        <div></div>
-      )}
-      {isStat ? (
-        <div className="menu-stat">
-          <Link to="/statistics/week">
-            <Button variant="dark" style={btnStyle2}>
-              Week
-            </Button>
-          </Link>{" "}
-          <Link to="/statistics/month">
-            <Button variant="dark" style={btnStyle2}>
-              Month
-            </Button>
-          </Link>{" "}
-          <Link to="/statistics/year">
-            <Button variant="dark" style={btnStyle2}>
-              Year
-            </Button>
-          </Link>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Statistics
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/statistics/week">
+            Week
+          </a>
+          <a class="dropdown-item" href="/statistics/month">
+            Month
+          </a>
+          <a class="dropdown-item" href="/statistics/year">
+            Year
+          </a>
         </div>
-      ) : (
-        <div></div>
-      )}
+      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useEffect } from "react";
 import LoginHeader from "../core/LoginHeader";
 import { Button } from "react-bootstrap";
@@ -66,8 +67,6 @@ export default function Login() {
         nickname: nickname,
       },
     };
-
-    console.log(response);
 
     axios
       .post("http://localhost:5000/api/cache", {
@@ -143,14 +142,6 @@ export default function Login() {
             <Link to="/signup">
               <Button variant="outline-primary">Sign Up</Button>
             </Link>
-            <div>
-              <GoogleLogin
-                clientId="1089234590403-7ear4pqjb2456mtg2rsj38kct6dp3vsb.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={signinGoogle}
-                onFailure={(response)=>console.log(response)}
-              />
-            </div>
           </div>
         </div>
       </div>

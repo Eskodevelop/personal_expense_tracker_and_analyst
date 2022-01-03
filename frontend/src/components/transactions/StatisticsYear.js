@@ -108,55 +108,55 @@ export default function StatisticsYear() {
       const temp = value.created.split("-");
       const month = temp[1];
 
-      if (month === "1") {
+      if (month === "01") {
         if (value.type === "income") {
           tempJanInc += value.amount;
         } else {
           tempJanExp += value.amount;
         }
-      } else if (month === "2") {
+      } else if (month === "02") {
         if (value.type === "income") {
           tempFebInc += value.amount;
         } else {
           tempFebExp += value.amount;
         }
-      } else if (month === "3") {
+      } else if (month === "03") {
         if (value.type === "income") {
           tempMarInc += value.amount;
         } else {
           tempMarExp += value.amount;
         }
-      } else if (month === "4") {
+      } else if (month === "04") {
         if (value.type === "income") {
           tempAprInc += value.amount;
         } else {
           tempAprExp += value.amount;
         }
-      } else if (month === "5") {
+      } else if (month === "05") {
         if (value.type === "income") {
           tempMayInc += value.amount;
         } else {
           tempMayExp += value.amount;
         }
-      } else if (month === "6") {
+      } else if (month === "06") {
         if (value.type === "income") {
           tempJunInc += value.amount;
         } else {
           tempJunExp += value.amount;
         }
-      } else if (month === "7") {
+      } else if (month === "07") {
         if (value.type === "income") {
           tempJulInc += value.amount;
         } else {
           tempJulExp += value.amount;
         }
-      } else if (month === "8") {
+      } else if (month === "08") {
         if (value.type === "income") {
           tempAugInc += value.amount;
         } else {
           tempAugExp += value.amount;
         }
-      } else if (month === "9") {
+      } else if (month === "09") {
         if (value.type === "income") {
           tempSepInc += value.amount;
         } else {

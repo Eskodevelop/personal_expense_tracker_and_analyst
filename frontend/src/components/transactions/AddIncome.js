@@ -27,6 +27,62 @@ export default function AddIncome() {
     setValues({ ...values, [name]: event.target.value });
   };
 
+  const currencyChange = (e) => {
+    if (values.currency === "") {
+      setValues({ ...values, currency: e.target.value });
+    }
+
+    if (e.target.value === "BAM") {
+      if (values.currency === "BAM") {
+        return;
+      } else if (values.currency === "$") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.69).toFixed(2),
+        });
+      } else if (values.currency === "€") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.96).toFixed(2),
+        });
+      }
+    } else if (e.target.value === "$") {
+      if (values.currency === "BAM") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 0.59).toFixed(2),
+        });
+      } else if (values.currency === "$") {
+        return;
+      } else if (values.currency === "€") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 1.16).toFixed(2),
+        });
+      }
+    } else if (e.target.value === "€") {
+      if (values.currency === "BAM") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.51).toFixed(2),
+        });
+      } else if (values.currency === "$") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.86).toFixed(2),
+        });
+      } else if (values.currency === "€") {
+        return;
+      }
+    }
+  };
+
   useEffect(async () => {
     if (!sessionStorage.getItem("token")) {
       return window.location.assign("/");
@@ -66,6 +122,17 @@ export default function AddIncome() {
 
     let same = false;
 
+    if (values.amount.split(".").length > 1) {
+      let temp = values.amount.split(".")[1].split("").length;
+
+      if (temp > 2) {
+        return setValues({
+          ...values,
+          error: "Amount must have maximum of 2 decimal points!",
+        });
+      }
+    }
+
     data.map((v, i) => {
       if (v.title === transaction.title) {
         same = true;
@@ -99,6 +166,13 @@ export default function AddIncome() {
       <Header name={user.firstName} id={user._id} />
       <AddMenu />
 
+      <h2
+        className="new-title"
+        style={{ textAlign: "center", color: "green", margin: "1rem" }}
+      >
+        New Income
+      </h2>
+
       <div className="income-form">
         <div className="form-outline">
           <input
@@ -107,6 +181,7 @@ export default function AddIncome() {
             className="form-control"
             placeholder="title"
             onChange={handleChange("title")}
+            style={{ borderColor: "green" }}
           />
         </div>
         <div
@@ -122,16 +197,17 @@ export default function AddIncome() {
             id="form12"
             className="form-control"
             placeholder="amount"
+            value={values.amount}
             onChange={handleChange("amount")}
-            style={{ width: "100%" }}
+            style={{ width: "100%", borderColor: "green" }}
           />
 
           <input
             className="dashboard-input"
             type="search"
             list="mylist"
-            onChange={handleChange("currency")}
-            style={{ width: "30%", height: "40px" }}
+            onChange={currencyChange}
+            style={{ width: "30%", height: "40px", borderColor: "green" }}
           />
           <datalist id="mylist">
             <option value="BAM" />

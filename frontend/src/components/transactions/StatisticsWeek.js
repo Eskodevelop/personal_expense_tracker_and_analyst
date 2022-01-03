@@ -53,10 +53,16 @@ export default function StatisticsWeek() {
               const currentDay = currentDate.getDate().toString();
               const currentMonth = (currentDate.getMonth() + 1).toString();
               const currentYear = currentDate.getFullYear().toString();
+              let currentM = "";
+
+              if (currentMonth.split("").length < 2) {
+                currentM = "0" + currentMonth;
+              }
 
               const weekChecker = currentDay - day;
+              console.log(month, currentM);
 
-              if (month === currentMonth && year === currentYear) {
+              if (month === currentM && year === currentYear) {
                 response[i] = value;
                 i++;
               }

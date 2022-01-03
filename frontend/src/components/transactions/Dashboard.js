@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { Chart } from "react-google-charts";
 import axios from "axios";
 
-/*eslint-disable*/ 
+/* eslint-disable */
 
 export default function Dashboard() {
   const [user, setUser] = useState({});
@@ -42,7 +42,7 @@ export default function Dashboard() {
         values.map((value, index) => {
           if (value.objectId._id == tempUser._id) {
             if (value.currency === "$") {
-              value.amount = 1.73 * value.amount;
+              value.amount *= 1.73;
             } else if (value.currency === "€") {
               value.amount *= 1.96;
             }
@@ -130,7 +130,7 @@ export default function Dashboard() {
           setTotalIncome(tempInc);
           let tempExp = totalExpense * 1.69;
           setTotalExpense(tempExp);
-          setTotal(tempTotal.toFixed(2));
+          setTotal(tempTotal.toFixed());
           setCurrency("BAM");
           tempData[index].amount *= 1.69;
           tempData[index].currency = "BAM";
@@ -227,15 +227,21 @@ export default function Dashboard() {
       <Menu />
       <div className="dashboard-main">
         <div className="dashboard-main-left">
-          <h2 className="dashboard-main-left-h2">Total Balance: {total}</h2>
+          <h2 className="dashboard-main-left-h2">
+            Total Balance: {parseFloat(total).toFixed(2)}
+          </h2>
           <div>
-            <input
-              className="dashboard-input"
-              type="search"
-              list="mylist"
-              onChange={changeHandler}
-              defaultValue="BAM"
-            />
+            <div className="form-outline" style={{ width: "100px" }}>
+              <input
+                type="search"
+                list="mylist"
+                className="form-control"
+                placeholder="currency"
+                onChange={changeHandler}
+                style={{ width: "125px" }}
+              />
+            </div>
+
             <datalist id="mylist">
               <option value="BAM" />
               <option value="$" />
@@ -280,72 +286,73 @@ export default function Dashboard() {
           </div>
           {all ? (
             <div>
-              {data &&
-                data.map((value, index) => {
-                  return (
-                    <div className="all" key={index}>
-                      <div className="all-div">
-                        <p className="all-title">
-                          {value.title}
-                          {value.type === "income" ? (
-                            <span className="all-income">
-                              +{value.amount.toFixed(2)} {value.currency}
-                            </span>
-                          ) : (
-                            <span className="all-expense">
-                              -{value.amount.toFixed(2)} {value.currency}
-                            </span>
-                          )}
-                        </p>
-                      </div>
-                      <p className="all-date">{value.created}</p>
+              {data.map((value, index) => {
+                return (
+                  <div className="all" key={index}>
+                    <div className="all-div">
+                      <p className="all-title">
+                        {value.title}
+                        {value.type === "income" ? (
+                          <span className="all-income">
+                            +{parseFloat(value.amount).toFixed(2)}{" "}
+                            {value.currency}
+                          </span>
+                        ) : (
+                          <span className="all-expense">
+                            -{parseFloat(value.amount).toFixed(2)}{" "}
+                            {value.currency}
+                          </span>
+                        )}
+                      </p>
                     </div>
-                  );
-                })}
+                    <p className="all-date">{value.created}</p>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div></div>
           )}
           {inc ? (
             <div>
-              {incomes &&
-                incomes.map((value, index) => {
-                  return (
-                    <div className="all" key={index}>
-                      <div className="all-div">
-                        <p className="all-title">
-                          {value.title}
-                          <span className="all-income">
-                            +{value.amount.toFixed(2)} {value.currency}
-                          </span>
-                        </p>
-                      </div>
-                      <p className="all-date">{value.created}</p>
+              {incomes.map((value, index) => {
+                return (
+                  <div className="all" key={index}>
+                    <div className="all-div">
+                      <p className="all-title">
+                        {value.title}
+                        <span className="all-income">
+                          +{parseFloat(value.amount).toFixed(2)}{" "}
+                          {value.currency}
+                        </span>
+                      </p>
                     </div>
-                  );
-                })}
+                    <p className="all-date">{value.created}</p>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div></div>
           )}
           {exp ? (
             <div>
-              {expenses &&
-                expenses.map((value, index) => {
-                  return (
-                    <div className="all" key={index}>
-                      <div className="all-div">
-                        <p className="all-title">
-                          {value.title}
-                          <span className="all-expense">
-                            -{value.amount.toFixed(2)} {value.currency}
-                          </span>
-                        </p>
-                      </div>
-                      <p className="all-date">{value.created}</p>
+              {expenses.map((value, index) => {
+                return (
+                  <div className="all" key={index}>
+                    <div className="all-div">
+                      <p className="all-title">
+                        {value.title}
+                        <span className="all-expense">
+                          -{parseFloat(value.amount).toFixed(2)}{" "}
+                          {value.currency}
+                        </span>
+                      </p>
                     </div>
-                  );
-                })}
+                    <p className="all-date">{value.created}</p>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div></div>

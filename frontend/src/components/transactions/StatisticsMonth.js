@@ -55,10 +55,15 @@ export default function StatisticsMonth() {
               const currentDay = currentDate.getDate().toString();
               const currentMonth = (currentDate.getMonth() + 1).toString();
               const currentYear = currentDate.getFullYear().toString();
+              let currentM = "";
+
+              if (currentMonth.split("").length < 2) {
+                currentM = "0" + currentMonth;
+              }
 
               const weekChecker = currentDay - day;
 
-              if (month === currentMonth && year === currentYear) {
+              if (month === currentM && year === currentYear) {
                 if (month === "1") {
                   setMonth("January");
                 } else if (month === "2") {

@@ -56,6 +56,62 @@ export default function AddExpense() {
     });
   }, []);
 
+  const currencyChange = (e) => {
+    if (values.currency === "") {
+      setValues({ ...values, currency: e.target.value });
+    }
+
+    if (e.target.value === "BAM") {
+      if (values.currency === "BAM") {
+        return;
+      } else if (values.currency === "$") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.69).toFixed(2),
+        });
+      } else if (values.currency === "€") {
+        setValues({
+          ...values,
+          currency: "BAM",
+          amount: parseFloat(values.amount * 1.96).toFixed(2),
+        });
+      }
+    } else if (e.target.value === "$") {
+      if (values.currency === "BAM") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 0.59).toFixed(2),
+        });
+      } else if (values.currency === "$") {
+        return;
+      } else if (values.currency === "€") {
+        setValues({
+          ...values,
+          currency: "$",
+          amount: parseFloat(values.amount * 1.16).toFixed(2),
+        });
+      }
+    } else if (e.target.value === "€") {
+      if (values.currency === "BAM") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.51).toFixed(2),
+        });
+      } else if (values.currency === "$") {
+        setValues({
+          ...values,
+          currency: "€",
+          amount: parseFloat(values.amount * 0.86).toFixed(2),
+        });
+      } else if (values.currency === "€") {
+        return;
+      }
+    }
+  };
+
   const clickHandler = (e) => {
     const transaction = {
       title: values.title || undefined,
@@ -66,6 +122,17 @@ export default function AddExpense() {
     };
 
     let same = false;
+
+    if (values.amount.split(".").length > 1) {
+      let temp = values.amount.split(".")[1].split("").length;
+
+      if (temp > 2) {
+        return setValues({
+          ...values,
+          error: "Amount must have maximum of 2 decimal points!",
+        });
+      }
+    }
 
     data.map((v, i) => {
       if (v.title === transaction.title) {
@@ -100,6 +167,13 @@ export default function AddExpense() {
       <Header name={user.firstName} id={user._id} />
       <AddMenu />
 
+      <h2
+        className="new-title"
+        style={{ textAlign: "center", color: "red", margin: "1rem" }}
+      >
+        New Expense
+      </h2>
+
       <div className="income-form">
         <div className="form-outline">
           <input
@@ -108,6 +182,7 @@ export default function AddExpense() {
             className="form-control"
             placeholder="title"
             onChange={handleChange("title")}
+            style={{ borderColor: "red" }}
           />
         </div>
         <div
@@ -124,15 +199,16 @@ export default function AddExpense() {
             className="form-control"
             placeholder="amount"
             onChange={handleChange("amount")}
-            style={{ width: "100%" }}
+            value={values.amount}
+            style={{ width: "100%", borderColor: "red" }}
           />
 
           <input
             className="dashboard-input"
             type="search"
             list="mylist"
-            onChange={handleChange("currency")}
-            style={{ width: "30%", height: "40px" }}
+            onChange={currencyChange}
+            style={{ width: "30%", height: "40px", borderColor: "red" }}
           />
           <datalist id="mylist">
             <option value="BAM" />

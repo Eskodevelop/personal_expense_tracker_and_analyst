@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "../core/Header";
 import auth from "./auth-helpers";
 import { read, update } from "./api-user";
-import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { Button, Alert } from "react-bootstrap";
@@ -89,7 +88,7 @@ export default function Edit({ match }) {
   };
 
   if (values.redirectToDashboard) {
-    return <Navigate to="/dashboard" />;
+    return window.location.assign("/");
   }
 
   return (

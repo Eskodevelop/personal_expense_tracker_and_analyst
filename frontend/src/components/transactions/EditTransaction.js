@@ -113,6 +113,17 @@ export default function EditTransaction() {
       objectId: values.objectId || undefined,
     };
 
+    if (toString(values.amount).split(".").length > 1) {
+      let temp = toString(values.amount).split(".")[1].split("").length;
+
+      if (temp > 2) {
+        return setValues({
+          ...values,
+          error: "Amount must have maximum of 2 decimal points!",
+        });
+      }
+    }
+
     update({ transactionId: transactionId }, transaction).then((data) => {
       if (data && data.error) {
         setValues({ ...values, error: data.error });
@@ -157,6 +168,7 @@ export default function EditTransaction() {
               id="form12"
               className="form-control"
               placeholder="amount"
+              defaultValue={values.amount}
               onChange={handleChange("amount")}
               style={{ width: "100%" }}
               value={values.amount}

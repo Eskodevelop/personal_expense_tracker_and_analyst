@@ -2,13 +2,8 @@ import React, { useEffect, useState } from "react";
 import paragon from "../../assets/paragon.png";
 import { Button } from "react-bootstrap";
 import { signout } from "../user/api-auth";
-import { Link } from "react-router-dom";
 import authHelpers from "../user/auth-helpers";
 import axios from "axios";
-
-const btnStyle = {
-  borderRadius: "0px",
-};
 
 /* eslint-disable */
 
@@ -34,14 +29,19 @@ export default function Header({ name, id }) {
       id: id || undefined,
     };
 
-    signout(user);
-    sessionStorage.removeItem("token");
+    signout(user).then((response) => {
+      if (response.error) {
+        console.log(response.error);
+      } else {
+        sessionStorage.removeItem("token");
 
-    if (sessionStorage.getItem("googleLogin")) {
-      sessionStorage.removeItem("googleLogin");
-    }
+        if (sessionStorage.getItem("googleLogin")) {
+          sessionStorage.removeItem("googleLogin");
+        }
 
-    window.location.assign("/");
+        window.location.assign("/");
+      }
+    });
   };
 
   useEffect(async () => {
@@ -58,35 +58,34 @@ export default function Header({ name, id }) {
       <p className="header-user">Hello, {firstName}</p>
 
       <div className="header-buttons">
-        <Button variant="outline-success" onClick={() => setIsMenu(!isMenu)}>
-          Profile
-        </Button>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Profile
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href={"/user/edit/" + id}>
+              Edit Profile
+            </a>
+            <a class="dropdown-item" href={"/user/edit/password/" + id}>
+              New Password
+            </a>
+            <a class="dropdown-item" href={"/user/delete/" + id}>
+              Delete Account
+            </a>
+          </div>
+        </div>
+
         <Button variant="outline-danger" onClick={logout}>
           Logout
         </Button>
       </div>
-
-      {isMenu ? (
-        <div className="menu">
-          <Link to={"/user/edit/" + id}>
-            <Button variant="outline-dark" style={btnStyle}>
-              Edit Profile
-            </Button>
-          </Link>
-          <Link to={"/user/edit/password/" + id}>
-            <Button variant="outline-dark" style={btnStyle}>
-              New Password
-            </Button>
-          </Link>
-          <Link to={"/user/delete/" + id}>
-            <Button variant="outline-dark" style={btnStyle}>
-              Delete Account
-            </Button>
-          </Link>
-        </div>
-      ) : (
-        <div></div>
-      )}
     </div>
   );
 }

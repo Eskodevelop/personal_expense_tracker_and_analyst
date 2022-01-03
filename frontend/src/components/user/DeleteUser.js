@@ -30,7 +30,7 @@ export default function DeleteUser() {
   });
   const [hashed_password, setHashed_password] = useState("");
   const [salt, setSalt] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { userId } = useParams();
   const jwt = authHelpers.isAuthenticated();
   const [transactionsIds, setTransactionsIds] = useState([]);
@@ -157,12 +157,17 @@ export default function DeleteUser() {
         </div>
         <div className="delete-buttons">
           <div className="delete-delete">
-            <Button variant="outline-primary" onClick={clickHandler}>
+            <Button variant="outline-primary" onClick={deleteHandler}>
               Delete
             </Button>
           </div>
           <Link to="/dashboard">
-            <Button variant="outline-danger">Back</Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => window.location.assign("/dashboard")}
+            >
+              Back
+            </Button>
           </Link>
         </div>
       </div>
@@ -171,10 +176,13 @@ export default function DeleteUser() {
           <ModalTitle>Delete Account</ModalTitle>
           <ModalBody>Are You sure you want to delete your account?</ModalBody>
           <ModalFooter>
-            <Button variant="outline-primary" onClick={deleteHandler}>
-              Delete
+            <Button variant="outline-primary" onClick={() => setIsOpen(false)}>
+              Yes
             </Button>
-            <Button variant="outline-danger" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="outline-danger"
+              onClick={() => window.location.assign("/dashboard")}
+            >
               Back
             </Button>
           </ModalFooter>

@@ -179,10 +179,7 @@ img {
   grid-template-columns: auto auto;
   margin-top: 25px;
   height: fit-content;
-}
-
-.dashboard-main-left {
-  margin-left: 10%;
+  gap: 0px;
 }
 
 .dashboard-main-left-h2 {
@@ -214,11 +211,17 @@ span {
 
 .dashboard-main-right {
   margin-top: 0px;
+  margin-left: -150%;
+  width: 250% !important;
 }
 
 .dashboard-main-right-buttons {
   margin-bottom: 25px;
   text-align: center;
+}
+
+.dashboard-main-left {
+  width: 50%;
 }
 
 .all {
@@ -276,6 +279,10 @@ span {
   margin-bottom: 45vh;
 }
 
+.td-main {
+  width: 50%;
+}
+
 .td-main-menu {
   display: flex;
   align-items: center;
@@ -303,6 +310,23 @@ span {
 
 @import "~react-vis/dist/style";
 
+.all-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-div > p {
+  width: 50%;
+}
+
+.transactions-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+}
+
 .stat-menu {
   display: flex;
   align-items: center;
@@ -321,7 +345,29 @@ span {
   border-bottom: 1px solid black;
 }
 
-@media only screen and (max-width: 768px) {
+.td-total {
+  margin: 2rem;
+  margin-left: 45%;
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.all-income,
+.all-expense {
+  float: right;
+}
+
+.dashboard-main-right {
+  width: 100%;
+}
+
+.dashboard-main-left {
+  margin-left: 0%;
+}
+
+@media only screen and (max-width: 980px) {
   body,
   * {
     font-size: 15px;
@@ -349,9 +395,48 @@ span {
     align-items: center;
     justify-content: center;
   }
+
+  .transactions-flex {
+    display: block;
+    margin-top: 7.5rem;
+  }
+
+  .td-main {
+    width: 100%;
+  }
+
+  .transactions-chart-td {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard-main-right {
+    margin-top: 0px;
+    margin-left: 5%;
+    width: 90% !important;
+  }
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 320px) {
+  .transactions-chart-td {
+    width: 135% !important;
+    margin: 0%;
+  }
+
+  .td-main {
+    width: 125%;
+    margin: 0%;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  body,
+  * {
+    font-size: 10px;
+  }
+
   .menu-tran {
     left: 38%;
   }
@@ -365,7 +450,19 @@ span {
     display: inline-block;
   }
 
-  .header-title{
+  .header-title {
     margin-left: 20%;
+  }
+
+  .transactions-flex {
+    display: block;
+    margin-top: 7.5rem;
+  }
+
+  .transactions-chart-td {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
