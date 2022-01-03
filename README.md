@@ -1,7 +1,7 @@
-# Personal_expense_tracker_and_analyst ( backend and frontend )
+# Personal expense tracker and analyst ( backend and frontend )
 ## Short description
 
-Personal_expense_tracker_and_analyst (PETA) is mern full stack web application which calculating our incomes and expenses on daily, weekly, monthly and yearly level. There are dashboard as general view of transactions, transactions where we can add our income or expense, and statistic in three different types. At beggining we should to sign up and then log in on the same account. There is option for editing profile, or password and deleting profile as well if we are angry because of our cash balance. We can convert our money(transactions) from default currency BAM (Bosnia and Herzegovina convertible mark) to € (euro) or $ (United States dollar).
+Personal expense tracker and analyst (PETA) is mern full stack web application which calculating our incomes and expenses on daily, weekly, monthly and yearly level. There are dashboard as general view of transactions, transactions where we can add our income or expense, and statistic in three different types. At beggining we should to sign up and then log in on the same account. There is option for editing profile, or password and deleting profile as well if we are angry because of our cash balance. We can convert our money(transactions) from default currency BAM (Bosnia and Herzegovina convertible mark) to € (euro) or $ (United States dollar).
 
 # Tehnologies
 ## Built With:
@@ -61,10 +61,10 @@ Personal_expense_tracker_and_analyst (PETA) is mern full stack web application w
 
 ## Explanation how to clone, install and use application
 1. Clone repository: https://github.com/Eskodevelop/personal_expense_tracker_and_analyst
-2. Open separately backend and frontend ( cd backend | cd frontend)
-3. Install npm packages: npm install ( backend and frontend )
-4. Run application(backend): npm start (http://localhost:5000/)
+2. Open separately backend and frontend (cd backend | cd frontend)
+3. Install npm packages: npm install (backend and frontend)
+4. Run application (backend): npm start (http://localhost:5000/)
 5. Run application on the web browser(frontend): npm start (http://localhost:3000/)
 
 ## Important note: 
-* When the user wants to change the currency (BAM, € or USD), on dashboard or transactions feature,first he must should remove the previous currency (click on the ✖     sign) and then click on the input or on the sign next to the input (🔽) and after that choose the currency in which we want to show our transactions.
+* When the user wants to change the currency (BAM, € or USD), on dashboard or transactions feature,first he must should remove the previous currency (click on the ✖     sign) and then click on the input or on the sign next to the input (🔽) and after that choose the currency in which we want to convert our money.
