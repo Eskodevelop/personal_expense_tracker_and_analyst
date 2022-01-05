@@ -23,6 +23,12 @@ export default function EditTransaction() {
     error: "",
   });
 
+  const [currency, setCurrency] = useState({
+    bam: false,
+    dollar: false,
+    euro: false,
+  });
+
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -49,6 +55,14 @@ export default function EditTransaction() {
           type: data.type,
           objectId: data.objectId,
         });
+
+        if (data.currency === "BAM") {
+          setCurrency({ ...currency, bam: true });
+        } else if (data.currency === "$") {
+          setCurrency({ ...currency, dollar: true });
+        } else if (data.currency === "€") {
+          setCurrency({ ...currency, euro: true });
+        }
       }
     });
   }, [transactionId]);
@@ -174,19 +188,18 @@ export default function EditTransaction() {
               value={values.amount}
             />
 
-            <input
+            <select
               className="dashboard-input"
-              type="search"
-              list="mylist"
+              id="mylist"
               onChange={currencyChange}
               defaultValue={values.currency}
-              style={{ width: "30%", height: "40px" }}
-            />
-            <datalist id="mylist">
-              <option value="BAM" />
-              <option value="$" />
-              <option value="€" />
-            </datalist>
+            >
+              <optgroup>
+                <option value="BAM" selected={currency.bam}>BAM</option>
+                <option value="$" selected={currency.dollar}>$</option>
+                <option value="€" selected={currency.euro}>€</option>
+              </optgroup>
+            </select>
           </div>
 
           {values.error && (

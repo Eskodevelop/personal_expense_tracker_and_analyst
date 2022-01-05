@@ -232,21 +232,14 @@ export default function Dashboard() {
           </h2>
           <div>
             <div className="form-outline" style={{ width: "100px" }}>
-              <input
-                type="search"
-                list="mylist"
-                className="form-control"
-                placeholder="currency"
-                onChange={changeHandler}
-                style={{ width: "125px" }}
-              />
+              <select id="mylist" onChange={changeHandler} style={{marginLeft:"15%"}}>
+                <optgroup label="currency">
+                  <option value="BAM">BAM</option>
+                  <option value="$">$</option>
+                  <option value="€">€</option>
+                </optgroup>
+              </select>
             </div>
-
-            <datalist id="mylist">
-              <option value="BAM" />
-              <option value="$" />
-              <option value="€" />
-            </datalist>
           </div>
           <div>
             <Chart

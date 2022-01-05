@@ -276,23 +276,22 @@ export default function TransactionsMonth() {
 
         <div className="td-total">
           <h2 className="td-title">Total: {parseFloat(total).toFixed(2)}</h2>
-          <h2 className="td-title">Ratio: {parseFloat(ration).toFixed(2)}</h2>
+          <h2 className="td-title">
+            Ratio: Expenses: {parseFloat(totalExpense).toFixed(2)} / Incomes:{" "}
+            {parseFloat(totalIncome).toFixed(2)}
+          </h2>
           <div className="form-outline" style={{ width: "100px" }}>
-            <input
-              type="search"
-              list="mylist"
-              className="form-control"
-              placeholder="currency"
-              style={{ width: "125px" }}
-              onChange={changeHandler}
-            />
+            <select id="mylist" onChange={changeHandler}>
+              <optgroup>
+                <option value="Choose" selected disabled>
+                  Choose a currency
+                </option>
+                <option value="BAM">BAM</option>
+                <option value="$">$</option>
+                <option value="€">€</option>
+              </optgroup>
+            </select>
           </div>
-
-          <datalist id="mylist">
-            <option value="BAM" />
-            <option value="$" />
-            <option value="€" />
-          </datalist>
         </div>
 
         <div className="transactions-flex">
@@ -302,9 +301,9 @@ export default function TransactionsMonth() {
               width={"500px"}
               height={"500px"}
               data={[
-                ["Ratio", ""],
-                ["Ratio", rationPercent],
-                ["", rest],
+                ["Income", "Expense"],
+                ["Incomes", totalIncome],
+                ["Expenses", totalExpense],
               ]}
               options={{ title: "Transactions" }}
             />

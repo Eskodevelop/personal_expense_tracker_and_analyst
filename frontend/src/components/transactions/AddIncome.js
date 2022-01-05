@@ -202,18 +202,20 @@ export default function AddIncome() {
             style={{ width: "100%", borderColor: "green" }}
           />
 
-          <input
+          <select
             className="dashboard-input"
-            type="search"
-            list="mylist"
+            id="mylist"
             onChange={currencyChange}
-            style={{ width: "30%", height: "40px", borderColor: "green" }}
-          />
-          <datalist id="mylist">
-            <option value="BAM" />
-            <option value="$" />
-            <option value="€" />
-          </datalist>
+          >
+            <optgroup>
+              <option value="Choose" selected disabled>
+                Choose a currency
+              </option>
+              <option value="BAM">BAM</option>
+              <option value="$">$</option>
+              <option value="€">€</option>
+            </optgroup>
+          </select>
         </div>
 
         {values.error && (

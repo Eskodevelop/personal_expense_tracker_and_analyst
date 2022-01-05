@@ -6,10 +6,22 @@ const getUniqueErrorMessage = (err) => {
       err.message.lastIndexOf(".$") + 2,
       err.message.lastIndexOf("_1")
     );
-    output =
-      fieldName.charAt(0).toUpperCase() +
-      fieldName.slice(1) +
-      " already exists";
+    let temp = err.message.split(":");
+
+    if (temp.length === 5) {
+      let newOutput =
+        fieldName.charAt(0).toUpperCase() +
+        fieldName.slice(1) +
+        " already exists";
+      let tempOutput = newOutput.split(":");
+      output = tempOutput[2];
+    } else {
+      output =
+        fieldName.charAt(0).toUpperCase() +
+        fieldName.slice(1) +
+        " already exists";
+    }
+    console.log(output);
   } catch (ex) {
     output = "Unique field already exists";
   }

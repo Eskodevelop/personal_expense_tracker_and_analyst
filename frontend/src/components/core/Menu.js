@@ -33,9 +33,9 @@ export default function Menu() {
         </Button>
       </Link>
 
-      <div class="dropdown">
+      <div className="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          className="btn btn-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -44,25 +44,25 @@ export default function Menu() {
         >
           Transactions
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/transactions/daily">
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a className="dropdown-item" href="/transactions/daily">
             Daily
           </a>
-          <a class="dropdown-item" href="/transactions/weekly">
+          <a className="dropdown-item" href="/transactions/weekly">
             Weekly
           </a>
-          <a class="dropdown-item" href="/transactions/monthly">
+          <a className="dropdown-item" href="/transactions/monthly">
             Montly
           </a>
-          <a class="dropdown-item" href="/transactions/yearly">
+          <a className="dropdown-item" href="/transactions/yearly">
             Yearly
           </a>
         </div>
       </div>
 
-      <div class="dropdown">
+      <div className="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          className="btn btn-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -71,14 +71,14 @@ export default function Menu() {
         >
           Statistics
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/statistics/week">
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a className="dropdown-item" href="/statistics/week">
             Week
           </a>
-          <a class="dropdown-item" href="/statistics/month">
+          <a className="dropdown-item" href="/statistics/month">
             Month
           </a>
-          <a class="dropdown-item" href="/statistics/year">
+          <a className="dropdown-item" href="/statistics/year">
             Year
           </a>
         </div>

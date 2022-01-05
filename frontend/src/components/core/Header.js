@@ -58,9 +58,9 @@ export default function Header({ name, id }) {
       <p className="header-user">Hello, {firstName}</p>
 
       <div className="header-buttons">
-        <div class="dropdown">
+        <div className="dropdown">
           <button
-            class="btn btn-secondary dropdown-toggle"
+            className="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -69,14 +69,14 @@ export default function Header({ name, id }) {
           >
             Profile
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href={"/user/edit/" + id}>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href={"/user/edit/" + id}>
               Edit Profile
             </a>
-            <a class="dropdown-item" href={"/user/edit/password/" + id}>
+            <a className="dropdown-item" href={"/user/edit/password/" + id}>
               New Password
             </a>
-            <a class="dropdown-item" href={"/user/delete/" + id}>
+            <a className="dropdown-item" href={"/user/delete/" + id}>
               Delete Account
             </a>
           </div>
