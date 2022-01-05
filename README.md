@@ -66,5 +66,3 @@ Personal expense tracker and analyst (PETA) is mern full stack web application w
 4. Run application (backend): npm start (http://localhost:5000/)
 5. Run application on the web browser(frontend): npm start (http://localhost:3000/)
 
-## Important note: 
-* When user wants to change the currency (BAM, € or USD), on dashboard or transactions feature, first he should remove the previous currency (click on the ✖ sign) and then click on the input or on the sign next to the input (🔽) and after that choose the currency in which we want to convert our money.
